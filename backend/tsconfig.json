@@ -2,7 +2,7 @@
     "compileOnSave": false,
     "compilerOptions": {
         "target": "es2020",
-        "typeRoots": ["../node_modules/@types"],
+        "typeRoots": ["../node_modules/@types", "./types"],
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
@@ -20,7 +20,10 @@
         "resolveJsonModule": true,
         "importHelpers": true,
         "baseUrl": "src",
-        "types": ["node", "express", "passport"]
+        "types": ["node", "express", "passport", "morgan"],
+        "paths": {
+            "@middlewares/*": ["./middlewares/*"]
+        }
     },
     "include": ["src/**/*.ts", "src/**/*.json", ".env"],
     "exclude": ["node_modules"]

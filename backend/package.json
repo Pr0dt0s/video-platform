@@ -3,18 +3,25 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
+    "type": "commonjs",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build:dev": "swc --out-dir dist -w --sync",
         "type-check": "tsc -p ./tsconfig.json",
         "type-check:dev": "tsc --watch -p ./tsconfig.dev.json",
-        "dev": "concurrently -n build,tsc,dev \"npm run build:dev\" \"npm run type-check:dev\" \"nodemon dist\""
+        "build:dev": "swc --out-dir dist -w --sync ./src",
+        "watch": "nodemon ./dist",
+        "dev": "concurrently -n build,tsc,dev \"npm run build:dev\" \"npm run type-check:dev\" \"npm run watch\""
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@types/morgan": "^1.9.4",
+        "dotenv": "^16.3.1",
         "express": "^4.18.2",
+        "express-request-id": "^3.0.0",
+        "morgan": "^1.10.0",
+        "nodemon": "^3.0.1",
         "passport": "^0.6.0"
     },
     "devDependencies": {
@@ -25,6 +32,7 @@
         "@types/passport": "^1.0.12",
         "@typescript-eslint/eslint-plugin": "^6.3.0",
         "@typescript-eslint/parser": "^6.3.0",
+        "chokidar": "^3.5.3",
         "concurrently": "^8.2.0",
         "eslint": "^8.47.0",
         "eslint-config-prettier": "^9.0.0",
