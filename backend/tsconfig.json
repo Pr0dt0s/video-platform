@@ -20,7 +20,6 @@
         "resolveJsonModule": true,
         "importHelpers": true,
         "baseUrl": "src",
-        "types": ["node", "express", "passport", "morgan"],
         "paths": {
             "@middlewares/*": ["./middlewares/*"]
         }

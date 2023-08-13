@@ -7,9 +7,9 @@ dotenv.config();
 const app = express();
 
 setUpMiddleWares(app);
-
-app.listen(3000, () => {
-    console.log('Server is listening on port 3000');
+const port = Number(process.env.PORT || 3000);
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
 });
 
 export default app;

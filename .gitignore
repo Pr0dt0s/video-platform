@@ -9,6 +9,7 @@ lerna-debug.log*
 
 .eslintcache
 .husky
+.env
 
 node_modules
 dist
