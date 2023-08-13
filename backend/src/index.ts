@@ -1,2 +1,2 @@
 
-console.log('Entrypoint')
+console.log('Entrypoint');
