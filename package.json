@@ -6,6 +6,10 @@
         "email": "prodtos2@gmail.com",
         "url": "https://Pr0dt0s.github.com"
     },
+    "workspaces": [
+        "backend",
+        "frontend"
+    ],
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^6.3.0",
         "@typescript-eslint/parser": "^6.3.0",

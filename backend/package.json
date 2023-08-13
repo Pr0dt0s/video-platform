@@ -8,8 +8,7 @@
         "build:dev": "swc --out-dir dist -w --sync",
         "type-check": "tsc -p ./tsconfig.json",
         "type-check:dev": "tsc --watch -p ./tsconfig.dev.json",
-        "dev": "concurrently -n build,tsc,dev \"npm run build:dev\" \"npm run type-check:dev\" \"nodemon dist\"",
-        "prepare": "husky install"
+        "dev": "concurrently -n build,tsc,dev \"npm run build:dev\" \"npm run type-check:dev\" \"nodemon dist\""
     },
     "keywords": [],
     "author": "",
@@ -30,7 +29,6 @@
         "eslint": "^8.47.0",
         "eslint-config-prettier": "^9.0.0",
         "eslint-plugin-prettier": "^5.0.0",
-        "husky": "^8.0.3",
         "lint-staged": "^13.3.0",
         "prettier": "3.0.1",
         "typescript": "^5.1.6"
