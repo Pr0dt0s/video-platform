@@ -7,6 +7,17 @@
     "url": "https://Pr0dt0s.github.com"
   },
   "devDependencies": {
-    "eslint-define-config": "^1.23.0"
+    "eslint": "^8.45.0",
+    "eslint-define-config": "^1.23.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.3.0",
+    "prettier": "3.0.1"
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs}": "eslint --cache --fix",
+    "*.{js,ts,cjs,mjs,css,md}": "prettier --write"
+  },
+  "scripts": {
+    "prepare": "husky install"
   }
 }
