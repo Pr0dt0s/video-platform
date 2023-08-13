@@ -18,8 +18,8 @@
         "prettier": "3.0.1"
     },
     "lint-staged": {
-        "./*.{js,ts}": "eslint --cache --fix",
-        "./*.{js,ts,cjs,mjs,css,md}": "prettier --write"
+    "./*.{js,ts}": "eslint --cache --fix",
+    "./*.{js,ts,cjs,mjs,css,md},package.json": "prettier --write"
     },
     "scripts": {
         "prepare": "husky install"
