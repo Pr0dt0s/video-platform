@@ -1,0 +1,12 @@
+{
+  "name": "video-platform",
+  "version": "0.0.0",
+  "author": {
+    "name": "Pedro Reyes",
+    "email": "prodtos2@gmail.com",
+    "url": "https://Pr0dt0s.github.com"
+  },
+  "devDependencies": {
+    "eslint-define-config": "^1.23.0"
+  }
+}
