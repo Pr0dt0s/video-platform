@@ -1,27 +1,27 @@
 {
-  "name": "video-platform",
-  "version": "0.0.0",
-  "author": {
-    "name": "Pedro Reyes",
-    "email": "prodtos2@gmail.com",
-    "url": "https://Pr0dt0s.github.com"
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.3.0",
-    "@typescript-eslint/parser": "^6.3.0",
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-define-config": "^1.23.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.3.0",
-    "prettier": "3.0.1"
-  },
-  "lint-staged": {
-    "./*.{js,ts}": "eslint --cache --fix",
-    "./*.{js,ts,cjs,mjs,css,md}": "prettier --write"
-  },
-  "scripts": {
-    "prepare": "husky install"
-  }
+    "name": "video-platform",
+    "version": "0.0.0",
+    "author": {
+        "name": "Pedro Reyes",
+        "email": "prodtos2@gmail.com",
+        "url": "https://Pr0dt0s.github.com"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^6.3.0",
+        "@typescript-eslint/parser": "^6.3.0",
+        "eslint": "^8.45.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-define-config": "^1.23.0",
+        "eslint-plugin-prettier": "^5.0.0",
+        "husky": "^8.0.3",
+        "lint-staged": "^13.3.0",
+        "prettier": "3.0.1"
+    },
+    "lint-staged": {
+        "./*.{js,ts}": "eslint --cache --fix",
+        "./*.{js,ts,cjs,mjs,css,md}": "prettier --write"
+    },
+    "scripts": {
+        "prepare": "husky install"
+    }
 }
