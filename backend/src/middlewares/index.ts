@@ -3,8 +3,10 @@ import requestLogger from './requestLogger';
 import helmet from 'helmet';
 import cors from 'cors';
 
+import { setupAuthentication } from './setupAuth';
+
 export const setUpMiddleWares = (app: Application) => {
-    //seccurity
+    //security
     app.use(helmet({}));
     app.use(
         cors({
@@ -18,4 +20,7 @@ export const setUpMiddleWares = (app: Application) => {
     //functionality
     requestLogger(app);
     app.use(express.json());
+
+    //Authentication/Authorization
+    setupAuthentication(app);
 };

@@ -6,6 +6,7 @@ declare global {
             NODE_ENV: 'development' | 'production' | 'test';
             PORT?: string;
             PWD: string;
+            JWT_PASSWORD: string;
         }
     }
 }
@@ -13,6 +14,10 @@ declare global {
 declare global {
     namespace Express {
         interface Request {
+            id: UUID;
+        }
+        interface User {
+            email: string;
             id: UUID;
         }
     }
