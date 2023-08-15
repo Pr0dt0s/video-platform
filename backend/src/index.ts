@@ -1,19 +1,38 @@
-import express from 'express';
+import express, { Application } from 'express';
 import dotenv from 'dotenv';
 import { setUpMiddleWares } from './middlewares';
-import { createBaseRouter } from './routers';
+import { createBaseRouter } from './routes';
+import http from 'http';
 
 dotenv.config();
 
-const app = express();
+class Server {
+    app: Application;
+    _server: http.Server;
 
-setUpMiddleWares(app);
+    constructor(private port: number) {
+        this.app = express();
 
-app.use('/api/v1', createBaseRouter());
+        setUpMiddleWares(this.app);
 
-const port = Number(process.env.PORT || 3000);
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
-});
+        this.app.use('/api/v1', createBaseRouter());
+    }
 
-export default app;
+    start(callback?: () => void) {
+        this._server = this.app.listen(this.port, () => {
+            console.log(`Server is listening on port ${this.port}`);
+            if (callback) callback();
+        });
+    }
+
+    stop() {
+        this._server?.close();
+    }
+}
+
+if (require.main === module) {
+    const server = new Server(Number(process.env.PORT || 3000));
+    server.start();
+}
+
+export default Server;

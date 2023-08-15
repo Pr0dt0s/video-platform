@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import { randomBytes } from 'crypto';
 import { authenticate } from '../middlewares/auth';

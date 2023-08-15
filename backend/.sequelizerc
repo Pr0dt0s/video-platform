@@ -1,0 +1,11 @@
+const path = require('path');
+
+/** @type {import('sequelize').Config} */
+const config = {
+    config: path.resolve('./dist', 'db', 'config.js'),
+    'models-path': path.resolve('./src', 'models'),
+    'seeders-path': path.resolve('./src', 'seeders'),
+    'migrations-path': path.resolve('./src', 'migrations'),
+};
+
+module.exports = config;
