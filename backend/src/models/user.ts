@@ -14,7 +14,7 @@ type UserAttributes = {
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
-class User extends Model<UserAttributes, UserCreationAttributes> {
+export class User extends Model<UserAttributes, UserCreationAttributes> {
     validatePassword(candidatePassword: string) {
         return new Promise<boolean>((resolve, reject) => {
             bcrypt.compare(
@@ -27,9 +27,27 @@ class User extends Model<UserAttributes, UserCreationAttributes> {
             );
         });
     }
+
+    public toExpressUser: () => Express.User = () => {
+        return {
+            id: this.getDataValue('id'),
+            name: this.getDataValue('name'),
+            email: this.getDataValue('email'),
+        };
+    };
+
     static assosiate(models: DatabaseModels) {
         User.hasMany(models.Video, {
-            foreignKey: 'userId',
+            as: 'publishedVideos',
+            foreignKey: 'owner',
+        });
+        User.hasMany(models.UserFollow, {
+            as: 'follows',
+            foreignKey: 'followee',
+        });
+        User.hasMany(models.UserFollow, {
+            as: 'beingFollowedBy',
+            foreignKey: 'followed',
         });
     }
 }
@@ -56,13 +74,12 @@ User.init(
             unique: true,
         },
         password: DataTypes.STRING,
-        newPassword: DataTypes.VIRTUAL,
-        confirmNewPassword: DataTypes.VIRTUAL,
+        newPassword: { type: DataTypes.VIRTUAL, allowNull: true },
+        confirmNewPassword: { type: DataTypes.VIRTUAL, allowNull: true },
     },
     {
         sequelize: sequelize,
         modelName: 'User',
-        paranoid: true,
     }
 );
 
@@ -92,5 +109,15 @@ User.addHook('beforeUpdate', (user) => {
         setUserPassword(user as User);
     }
 });
+
+declare global {
+    namespace Express {
+        interface User {
+            id: string;
+            name: string;
+            email: string;
+        }
+    }
+}
 
 export default User;

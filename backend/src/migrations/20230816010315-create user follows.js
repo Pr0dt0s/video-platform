@@ -3,16 +3,21 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        queryInterface.createTable('Videos', {
+        queryInterface.createTable('UserFollows', {
             id: {
-                type: Sequelize.STRING,
                 allowNull: false,
+                autoIncrement: true,
                 primaryKey: true,
+                type: Sequelize.INTEGER,
             },
-            url: Sequelize.STRING,
-            description: Sequelize.STRING,
-            published: Sequelize.BOOLEAN,
-            owner: {
+            followee: {
+                type: Sequelize.STRING,
+                references: {
+                    model: 'Users',
+                    key: 'id',
+                },
+            },
+            followed: {
                 type: Sequelize.STRING,
                 references: {
                     model: 'Users',
@@ -27,14 +32,10 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE,
             },
-            deletedAt: {
-                allowNull: true,
-                type: Sequelize.DATE,
-            },
         });
     },
 
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable('Videos');
+        await queryInterface.dropTable('UserFollows');
     },
 };

@@ -4,6 +4,8 @@ import { setUpMiddleWares } from './middlewares';
 import { createBaseRouter } from './routes';
 import http from 'http';
 
+export * from './models/index';
+
 dotenv.config();
 
 class Server {

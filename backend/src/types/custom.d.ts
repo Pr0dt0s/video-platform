@@ -16,9 +16,5 @@ declare global {
         interface Request {
             id: UUID;
         }
-        interface User {
-            email: string;
-            id: UUID;
-        }
     }
 }

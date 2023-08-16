@@ -5,7 +5,7 @@ import path from 'path';
 export type { Sequelize } from 'sequelize';
 
 const env = process.env.NODE_ENV || 'development';
-const config = require(path.join(`${__dirname}/../config/database`))[env];
+const config = require(path.join(`${__dirname}/../db/config`))[env];
 
 export const sequelize = new Sequelize.Sequelize(
     config.database,
@@ -14,5 +14,6 @@ export const sequelize = new Sequelize.Sequelize(
     {
         ...config,
         logQueryParameters: true,
+        logging: process.env.NODE_ENV === 'development' ? console.log : false,
     }
 );

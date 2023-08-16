@@ -4,22 +4,14 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import { UUID } from 'crypto';
 import session from 'express-session';
-
-// TODO: move to Model/DTO
-type User = {
-    email: string;
-    password: string;
-    id: UUID;
-};
+import User from '../models/user';
 
 // TODO: change to database query
-const queryUserByEmail: (email: string) => Promise<User | null> = (
-    email: string
-) => {
-    return Promise.resolve({
-        email,
-        password: 'temporary',
-        id: '1-2-3-4-5',
+const queryUserByEmail: (email: string) => Promise<User | null> = (email) => {
+    return User.findOne({
+        where: {
+            email: email,
+        },
     });
 };
 
@@ -43,8 +35,13 @@ export const setupAuthentication = (app: Application) => {
             async (email, password, done) => {
                 const user = await queryUserByEmail(email);
                 if (!user) return done(null, false);
-                if (user.password != password) return done(null, false);
-                return done(null, { email: user.email, id: user.id });
+                if (!(await user.validatePassword(password)))
+                    return done(null, false);
+                return done(null, {
+                    id: user.getDataValue('id'),
+                    email: user.getDataValue('email'),
+                    name: user.getDataValue('name'),
+                });
             }
         )
     );
@@ -57,8 +54,21 @@ export const setupAuthentication = (app: Application) => {
             },
             async (payload, done) => {
                 if ('email' in payload) {
-                    const user = await queryUserByEmail(payload['email']);
-                    return done(null, { email: user.email, id: user.id });
+                    const user = await User.findOne({
+                        where: {
+                            email: payload['email'],
+                        },
+                    });
+                    if (!user) {
+                        return done(
+                            `No user found for email ${payload['email']}`
+                        );
+                    }
+                    return done(null, {
+                        id: user.getDataValue('id'),
+                        email: user.getDataValue('email'),
+                        name: user.getDataValue('name'),
+                    });
                 }
                 return done(null, false);
             }

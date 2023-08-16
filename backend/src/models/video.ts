@@ -14,12 +14,9 @@ type VideoAttributes = {
 
 interface VideoCreationAttributes extends Optional<VideoAttributes, 'id'> {}
 
-export default class Video extends Model<
-    VideoAttributes,
-    VideoCreationAttributes
-> {
+export class Video extends Model<VideoAttributes, VideoCreationAttributes> {
     static assosiate(models: DatabaseModels) {
-        Video.belongsTo(models.User);
+        Video.belongsTo(models.User, { foreignKey: 'id' });
     }
 }
 
@@ -36,7 +33,7 @@ Video.init(
         owner: {
             type: DataTypes.UUIDV4,
             references: {
-                model: 'User',
+                model: 'Users',
                 key: 'id',
             },
         },
@@ -44,6 +41,5 @@ Video.init(
     {
         sequelize,
         modelName: 'Video',
-        paranoid: true,
     }
 );

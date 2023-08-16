@@ -7,7 +7,7 @@
     "scripts": {
         "sequelize-cli": "sequelize-cli",
         "test": "jest",
-        "test:watch": "jest --watch",
+        "test:watch": "jest --watchAll",
         "type-check": "tsc -p ./tsconfig.json",
         "type-check:dev": "tsc --watch -p ./tsconfig.dev.json",
         "build": "swc --out-dir dist ./src",
