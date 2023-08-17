@@ -4,12 +4,11 @@ process.env.NODE_ENV = 'development';
 
 import Server from '../src';
 import { Application } from 'express';
-import User from '../src/models/user';
+import { Video } from '../src/models/video';
 import { generateAccessTokens } from '../src/routes/authRouter';
 import { sequelize } from '../src/models/_db';
-import { UserCreateDTO } from '../src/dtos/user.dto';
 
-let server = new Server(12121);
+let server = new Server(12123);
 let app: Application = server.app;
 
 beforeAll((done) => {
@@ -21,21 +20,20 @@ beforeAll((done) => {
     server.start(done);
 });
 
-let createdUsers: User[];
+let createdVideos: Video[];
 
 beforeAll((done) => {
     new Promise<void>(async (resolve, reject) => {
         try {
-            await User.destroy({
+            await Video.destroy({
                 force: true,
                 cascade: true,
                 truncate: true,
             }).then(done);
-            createdUsers = await User.bulkCreate(
-                testUsers.map((user) => ({
-                    ...user,
-                    newPassword: user.password,
-                    confirmNewPassword: user.password,
+            createdVideos = await Video.bulkCreate(
+                testVideos.map((video) => ({
+                    //@ts-ignore
+                    ...video,
                 })),
                 { individualHooks: true }
             );
@@ -47,31 +45,12 @@ beforeAll((done) => {
     });
 });
 
-const testUsers: UserCreateDTO[] = [
-    {
-        name: 'Frodo',
-        email: 'a@b.com',
-        password: 'asdQWE123!@#',
-    },
-    {
-        name: 'Sam',
-        email: 'b@b.com',
-        password: 'asdQWE123!@#',
-    },
-    {
-        name: 'Aragorn',
-        email: 'c@b.com',
-        password: 'asdQWE123!@#',
-    },
-    {
-        name: 'Legolas',
-        email: 'd@b.com',
-        password: 'asdQWE123!@#',
-    },
-];
+const testVideos = [];
 
 describe('Videos api', () => {
-    it.skip('Creates new videos', () => {});
+    it('Creates new videos', () => {
+        expect(1).toBe(0);
+    });
 
     it.skip('Publishes videos', () => {});
 
